@@ -37,6 +37,7 @@ curl \
 | SMTP_PORT     | 587             |        |
 | SMTP_USERNAME |                 | x      |
 | SMTP_PASSWORD |                 | x      |
+| SMTP_SENDER   |                 | x      |
 | AMQP_HOST     |                 | x      |
 | AMQP_PORT     | 5672            |        |
 | AMQP_USERNAME |                 | x      |

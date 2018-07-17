@@ -1,0 +1,2 @@
+module RailMail.AMQPListener
+

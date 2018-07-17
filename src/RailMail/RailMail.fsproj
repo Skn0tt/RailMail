@@ -10,7 +10,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="EnvelopeParser.fs" />
+    <Compile Include="Envelope.fs" />
+    <Compile Include="AMQPListener.fs" />
+    <Compile Include="Dispatcher.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
