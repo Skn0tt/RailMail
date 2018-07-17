@@ -1,3 +1,4 @@
+FSharp.Data
 Microsoft.AspNetCore.Cors
 Microsoft.AspNetCore.Server.Kestrel
 Microsoft.AspNetCore.Server.IISIntegration
