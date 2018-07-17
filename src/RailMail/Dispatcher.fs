@@ -5,6 +5,7 @@ open System
 open System.Net
 
 open RailMail.Envelope
+open System.Net.Mime
 
 let SMTP_HOST = Environment.GetEnvironmentVariable "SMTP_HOST"
 let SMTP_PORT = Environment.GetEnvironmentVariable "SMTP_PORT" |> int
@@ -17,13 +18,24 @@ client.EnableSsl <- true
 client.Credentials <- NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD)
 client.DeliveryMethod <- SmtpDeliveryMethod.Network
 
+let private mimeType = ContentType("text/html")
+let private constructAlternateView (e : Envelope) =
+  AlternateView.CreateAlternateViewFromString(e.body.html, mimeType)
+
 let private constructMessage (e : Envelope) =
-  new MailMessage(
-    SMTP_SENDER,
-    e.recipient,
-    e.subject,
-    e.body.text
-  )
+  let msg =
+    new MailMessage(
+      SMTP_SENDER,
+      e.recipient,
+      e.subject,
+      e.body.text
+    )
+  
+  if not(isNull e.body.html) then
+    let alternateView = constructAlternateView e  
+    msg.AlternateViews.Add(alternateView)
+  
+  msg  
 
 let dispatch (e : Envelope) =
   use msg = constructMessage e

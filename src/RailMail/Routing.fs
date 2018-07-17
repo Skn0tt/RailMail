@@ -3,13 +3,16 @@ module RailMail.Routing
 open Giraffe
 open Microsoft.AspNetCore.Http
 
-open RailMail.Envelope
-
 let mailHandler (next: HttpFunc) (ctx: HttpContext) =
   task {
-    let! envelope = ctx.BindJsonAsync<Envelope>()
-    Dispatcher.dispatch envelope
-    return! setStatusCode 200 next ctx
+    let! body = ctx.ReadBodyFromRequestAsync()
+    
+    return! match Envelope.parse body with
+            | Choice1Of2 e ->
+              RequestErrors.BAD_REQUEST e next ctx
+            | Choice2Of2 v ->
+              Dispatcher.dispatch v
+              setStatusCode 200 next ctx
   }
 
 let webApp: HttpHandler =
