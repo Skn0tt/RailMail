@@ -1,0 +1,10 @@
+source https://www.nuget.org/api/v2
+
+nuget Giraffe >= 1.1.0
+nuget Microsoft.AspNetCore.Authentication.Cookies >= 2.0.0
+nuget Microsoft.AspNetCore.Cors >= 2.0.0
+nuget Microsoft.AspNetCore.Server.IISIntegration >= 2.0.0
+nuget Microsoft.AspNetCore.Server.Kestrel >= 2.0.0
+nuget Microsoft.AspNetCore.StaticFiles >= 2.0.0
+nuget Microsoft.Extensions.Logging.Console >= 2.0.0
+nuget Microsoft.Extensions.Logging.Debug >= 2.0.0
