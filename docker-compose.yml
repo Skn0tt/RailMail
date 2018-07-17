@@ -4,15 +4,16 @@ services:
   railmail:
     build: .
     environment:
-      SMTP_HOST
-      SMTP_PORT
-      SMTP_USERNAME
-      SMTP_PASSWORD
-      AMQP_HOST
-      AMQP_PORT
-      AMQP_USERNAME
-      AMQP_PASSWORD
-      AMQP_QUEUE
+      SMTP_HOST: smtp.ethereal.email
+      SMTP_PORT: 587
+      SMTP_USERNAME: p33ijercxqsti6cb@ethereal.email
+      SMTP_PASSWORD: Hn9CefuuktzY5wZDSs
+      SMTP_SENDER: test@ethereal.email
+      # AMQP_HOST
+      # AMQP_PORT
+      # AMQP_USERNAME
+      # AMQP_PASSWORD
+      # AMQP_QUEUE
     ports:
       - "5000:5000"
   rabbitmq:
