@@ -26,7 +26,7 @@ This JSON is sent either to the specified AMQP Queue or POSTed to the REST Endpo
 curl \
   -X POST \
   --data '{ "recipient": ... }' \
-  http://railmail:3000/mail
+  http://railmail:5000/mail
 ```
 
 ## Configuration
@@ -43,7 +43,7 @@ curl \
 | AMQP_PASSWORD |                 | x      |
 | AMQP_QUEUE    | RAILMAIL_INGEST |        |
 
-Railmail's standard port is `3000`.
+Railmail's standard port is `5000`.
 
 
 ## Build and test the application
