@@ -25,4 +25,5 @@ let webApp: HttpHandler =
       choose [
         route "/mail" >=> mailHandler
       ]
+    RequestErrors.NOT_FOUND "Not Found"    
   ]
