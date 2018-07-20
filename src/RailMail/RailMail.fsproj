@@ -11,8 +11,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Envelope.fs" />
-    <Compile Include="AMQPListener.fs" />
     <Compile Include="Dispatcher.fs" />
+    <Compile Include="AMQPHelper.fs" />
+    <Compile Include="AMQPListener.fs" />
     <Compile Include="Routing.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

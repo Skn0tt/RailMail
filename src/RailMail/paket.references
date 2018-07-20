@@ -7,3 +7,5 @@ Microsoft.Extensions.Logging.Console
 Microsoft.Extensions.Logging.Debug
 Microsoft.AspNetCore.Authentication.Cookies
 Giraffe
+RabbitMQ.Client
+dotenv.net

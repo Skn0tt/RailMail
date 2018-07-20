@@ -6,6 +6,7 @@ open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Logging
 open Microsoft.Extensions.DependencyInjection
 open Giraffe
+open dotenv.net
 
 open RailMail.Routing
 
@@ -23,18 +24,26 @@ let errorHandler (ex : Exception) (logger : ILogger) =
 
 let configureApp (app : IApplicationBuilder) =
     let env = app.ApplicationServices.GetService<IHostingEnvironment>()
+    
     (match env.IsDevelopment() with
     | true  -> app.UseDeveloperExceptionPage()
     | false -> app.UseGiraffeErrorHandler errorHandler)
         .UseStaticFiles()
         .UseGiraffe(webApp)
+    
+    DotEnv.Config(false, "../../.env")
+    AMQPListener.start()    
 
 let configureServices (services : IServiceCollection) =
     services.AddGiraffe() |> ignore
 
 let configureLogging (builder : ILoggingBuilder) =
-    let filter (l : LogLevel) = l.Equals LogLevel.Error
-    builder.AddFilter(filter).AddConsole().AddDebug() |> ignore
+    let filter (l : LogLevel) = true
+    builder
+        .AddFilter(filter)
+        .AddConsole()
+        .AddDebug()
+    |> ignore
 
 [<EntryPoint>]
 let main _ =

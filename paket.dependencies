@@ -1,5 +1,6 @@
 source https://www.nuget.org/api/v2
 
+nuget dotenv.net >= 1.0.3
 nuget FSharp.Data 2.4.6
 nuget Giraffe >= 1.1.0
 nuget Microsoft.AspNetCore.Authentication.Cookies >= 2.0.0
@@ -9,3 +10,4 @@ nuget Microsoft.AspNetCore.Server.Kestrel >= 2.0.0
 nuget Microsoft.AspNetCore.StaticFiles >= 2.0.0
 nuget Microsoft.Extensions.Logging.Console >= 2.0.0
 nuget Microsoft.Extensions.Logging.Debug >= 2.0.0
+nuget RabbitMQ.Client 5.1.0
