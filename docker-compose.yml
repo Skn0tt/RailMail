@@ -4,6 +4,7 @@ services:
   
   railmail:
     build: .
+    restart: on-failure
     environment:
       SMTP_HOST: smtp.ethereal.email
       SMTP_PORT: 587
@@ -16,7 +17,7 @@ services:
       AMQP_PASSWORD: guest
       AMQP_QUEUE: railmail-ingest
     ports:
-      - "5000:5000"
+      - "5000:80"
   
   rabbitmq:
     image: rabbitmq

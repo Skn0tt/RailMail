@@ -1,7 +1,25 @@
-FROM fsharp
+FROM dcurylo/fsharp-mono-netcore AS build-env
+WORKDIR /app
 
-ADD src/RailMail src/RailMail
+# Add Paket
+COPY .paket/paket.bootstrapper.exe .paket/
+RUN mono .paket/paket.bootstrapper.exe
 
-RUN dotnet build src/RailMail
+# Install Dependencies
+COPY paket.lock paket.dependencies ./
+COPY .paket/Paket.Restore.targets .paket/
 
-ENTRYPOINT ["mono", "/root/src/Program.exe"] 
+RUN mono .paket/paket.exe install
+
+# Build
+COPY src/RailMail/** src/RailMail/
+RUN dotnet publish -c Release -o out src/RailMail
+
+# Copy to Runtime
+FROM microsoft/dotnet:aspnetcore-runtime
+WORKDIR /app
+COPY --from=build-env /app/src/RailMail/out .
+
+EXPOSE 80
+
+ENTRYPOINT ["dotnet", "RailMail.dll"]
