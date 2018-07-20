@@ -1,13 +1,13 @@
 namespace RailMail
 
-module Dispatcher =
-
-  open System.Net.Mail
+module SMTP =
+  
   open System.Net
-
-  open RailMail.Helpers
-  open RailMail.Envelope
+  open System.Net.Mail
   open System.Net.Mime
+  
+  open Envelope
+  open Helpers
 
   let private SMTP_HOST = getEnvironmentVariable "SMTP_HOST"
   let private SMTP_PORT = getEnvironmentVariableWithDefault "SMTP_PORT" "587" |> int

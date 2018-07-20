@@ -10,13 +10,25 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <!-- Common -->
     <Compile Include="Helpers.fs" />
+
+    <!-- Domain Types -->
     <Compile Include="Envelope.fs" />
-    <Compile Include="Dispatcher.fs" />
-    <Compile Include="AMQPHelper.fs" />
-    <Compile Include="AMQPListener.fs" />
-    <Compile Include="Routing.fs" />
-    <Compile Include="Program.fs" />
+
+    <!-- Infrastructure -->
+    <Compile Include="SMTP.fs" />
+    <Compile Include="AMQP.fs" />
+
+    <!-- Domain Logic -->
+    <Compile Include="ProcessMessage.fs" />
+
+    <!-- Network Interface -->
+    <Compile Include="AMQPInterface.fs" />
+    <Compile Include="RESTInterface.fs" />
+
+    <!-- Entrypoint -->
+    <Compile Include="Main.fs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.config" CopyToOutputDirectory="PreserveNewest" />
