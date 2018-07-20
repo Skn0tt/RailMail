@@ -10,6 +10,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Helpers.fs" />
     <Compile Include="Envelope.fs" />
     <Compile Include="Dispatcher.fs" />
     <Compile Include="AMQPHelper.fs" />

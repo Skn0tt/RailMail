@@ -1,20 +1,18 @@
 module RailMail.AMQPHelper
 
-open System
 open System.Text
 
 open RabbitMQ.Client
 open RabbitMQ.Client.Events
 
+open RailMail.Helpers
 
-let private INGEST_QUEUE = match Environment.GetEnvironmentVariable "AMQP_QUEUE" with
-                           | null -> "RAILMAIL_INGEST"
-                           | v -> v           
 
-let private AMQP_USERNAME = Environment.GetEnvironmentVariable "AMQP_USERNAME"
-let private AMQP_PASSWORD = Environment.GetEnvironmentVariable "AMQP_PASSWORD"
-let private AMQP_HOST = Environment.GetEnvironmentVariable "AMQP_HOST"
-let private AMQP_PORT = Environment.GetEnvironmentVariable "AMQP_PORT" |> int
+let private AMQP_QUEUE = getEnvironmentVariableWithDefault "AMQP_QUEUE" "RAILMAIL_INGEST"
+let private AMQP_USERNAME = getEnvironmentVariable "AMQP_USERNAME"
+let private AMQP_PASSWORD = getEnvironmentVariable "AMQP_PASSWORD"
+let private AMQP_HOST = getEnvironmentVariable "AMQP_HOST"
+let private AMQP_PORT = getEnvironmentVariableWithDefault "AMQP_PORT" "5672" |> int
 
 
 type Queue =
@@ -22,7 +20,7 @@ type Queue =
 
 let private resolve queue =
   match queue with
-  | RailMailIngest -> INGEST_QUEUE
+  | RailMailIngest -> AMQP_QUEUE
 
 let private declare (channel : IModel) queueName =
   channel.QueueDeclare(queueName, true, false, false, null)
