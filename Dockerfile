@@ -1,4 +1,4 @@
-FROM dcurylo/fsharp-mono-netcore AS build-env
+FROM dcurylo/fsharp-mono-netcore:2.1.301 AS build-env
 WORKDIR /app
 
 # Add Paket
@@ -16,7 +16,7 @@ COPY src/RailMail/** src/RailMail/
 RUN dotnet publish -c Release -o out src/RailMail
 
 # Copy to Runtime
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/src/RailMail/out .
 
