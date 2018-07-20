@@ -17,6 +17,7 @@
     <Compile Include="Envelope.fs" />
 
     <!-- Infrastructure -->
+    <Compile Include="Config.fs" />
     <Compile Include="SMTP.fs" />
     <Compile Include="AMQP.fs" />
 

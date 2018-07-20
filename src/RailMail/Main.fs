@@ -7,7 +7,11 @@ module Main =
   [<EntryPoint>]
   let main _ =
     DotEnv.Config(false, "../../.env")
-    AMQPInterface.start()
+
+    match AMQPConfig.enabled with
+    | true -> AMQPInterface.start()
+    | false -> ()
+    
     RESTInterface.start()
     
     0

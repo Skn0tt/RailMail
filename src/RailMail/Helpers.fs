@@ -10,7 +10,7 @@ module Helpers =
     match var with
     | null -> None
     | n -> Some n
-  
+    
   let getEnvironmentVariable name =
     match getEnvironmentVariableOption name with
     | Some n -> n

@@ -7,17 +7,12 @@ module SMTP =
   open System.Net.Mime
   
   open Envelope
-  open Helpers
 
-  let private SMTP_HOST = getEnvironmentVariable "SMTP_HOST"
-  let private SMTP_PORT = getEnvironmentVariableWithDefault "SMTP_PORT" "587" |> int
-  let private SMTP_USERNAME = getEnvironmentVariable "SMTP_USERNAME"
-  let private SMTP_PASSWORD = getEnvironmentVariable "SMTP_PASSWORD"
-  let private SMTP_SENDER = getEnvironmentVariable "SMTP_SENDER"
+  let private config = SMTPConfig.config
 
-  let private client = new SmtpClient(SMTP_HOST, SMTP_PORT)
+  let private client = new SmtpClient(config.host, config.port)
   client.EnableSsl <- true
-  client.Credentials <- NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD)
+  client.Credentials <- NetworkCredential(config.username, config.password)
   client.DeliveryMethod <- SmtpDeliveryMethod.Network
 
   let private mimeType = ContentType("text/html")
@@ -27,7 +22,7 @@ module SMTP =
   let private constructMessage (e : Envelope) =
     let msg =
       new MailMessage(
-        SMTP_SENDER,
+        config.sender,
         e.recipient,
         e.subject,
         e.body.text

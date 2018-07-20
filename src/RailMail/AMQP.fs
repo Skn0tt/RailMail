@@ -7,31 +7,24 @@ module AMQP =
   open RabbitMQ.Client
   open RabbitMQ.Client.Events
 
-  open Helpers
-
-  let private AMQP_QUEUE = getEnvironmentVariableWithDefault "AMQP_QUEUE" "RAILMAIL_INGEST"
-  let private AMQP_USERNAME = getEnvironmentVariable "AMQP_USERNAME"
-  let private AMQP_PASSWORD = getEnvironmentVariable "AMQP_PASSWORD"
-  let private AMQP_HOST = getEnvironmentVariable "AMQP_HOST"
-  let private AMQP_PORT = getEnvironmentVariableWithDefault "AMQP_PORT" "5672" |> int
-
+  let private config = AMQPConfig.config()
 
   type Queue =
     | RailMailIngest
 
   let private resolve queue =
     match queue with
-    | RailMailIngest -> AMQP_QUEUE
+    | RailMailIngest -> config.queue
 
   let private declare (channel : IModel) queueName =
     channel.QueueDeclare(queueName, true, false, false, null)
 
   let private factory =
     ConnectionFactory(
-      HostName = AMQP_HOST,
-      Port = AMQP_PORT,
-      UserName = AMQP_USERNAME,
-      Password = AMQP_PASSWORD
+      HostName = config.host,
+      Port = config.port,
+      UserName = config.username,
+      Password = config.password
     )
 
   let subscribe queue callback =
