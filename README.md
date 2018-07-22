@@ -12,7 +12,7 @@ Envelope information is transmitted in the following JSON format:
 
 ```json
 {
-  "recipient": "test@test.com",
+  "recipients": "test@test.com",
   "subject": "Funky Mail Dispatcher!",
   "body": {
     "text": "Hey Flo, I found that great service called RailMail! Check it out!",

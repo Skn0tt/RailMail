@@ -9,6 +9,7 @@ module SMTP =
   open Envelope
 
   let private config = SMTPConfig.config
+  let private fromAddress = new MailAddress(config.sender)
 
   let private client = new SmtpClient(config.host, config.port)
   client.EnableSsl <- true
@@ -20,13 +21,13 @@ module SMTP =
     AlternateView.CreateAlternateViewFromString(e.body.html, mimeType)
 
   let private constructMessage (e : Envelope) =
-    let msg =
-      new MailMessage(
-        config.sender,
-        e.recipient,
-        e.subject,
-        e.body.text
-      )
+    let msg = new MailMessage()
+    msg.From <- fromAddress
+    msg.Body <- e.body.text
+    msg.Subject <- e.subject
+    
+    for r in e.recipients do
+      msg.To.Add(r)
     
     if not(isNull e.body.html) then
       let alternateView = constructAlternateView e  

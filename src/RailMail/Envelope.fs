@@ -18,7 +18,7 @@ module Envelope =
   [<CLIMutable>]
   type Envelope =
     {
-      recipient : string
+      recipients : string list
       subject : string
       body : EnvelopeBody
     }
