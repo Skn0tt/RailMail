@@ -6,6 +6,8 @@ RailMail is a Reactive Mail dispatcher written in F#.
 It takes Mail requests from AMQP/RabbitMQ and a REST API.
 Dispatch happens over SMTP.
 
+- [Blog Post](https://simonknott.de/articles/fsharp-railmail)
+
 ## API
 
 Envelope information is transmitted in the following JSON format:
